@@ -1,39 +1,54 @@
-'use strict';
+const dbRequest = require('./functions');
+const testData = require('./testdata');
 
-// Setup basic express server
-var express = require('express');
-var app = express();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var port = process.env.PORT || 3000;
 
-server.listen(port, function () {
-  console.log('Server listening at port %d', port);
+let actions = '';
+let message = `
+1. Добавить имёна в коллекцию users -  'addName Имя1 Имя2 ...'
+2. Вывести список всех имен в коллекции users 'showNames'. Чтобы найти определенное имя 'showNames Имя1 Имя2 ...'
+3. Изменить несколько имён на другие 'chageNames ИмяДоИзменение ИмяПослеИзменения'. Если найдено несколько имен изменяет все. 
+4. Отобразить список измененных имен 'showChangedNames'. Поиск по истории измененных имен showChangedNames Имя
+5. Чтобы удалить измененные имена после changeNames 'resetNames'
+Для выхода exit.
+`;
+
+
+console.log(`Добро пожаловать! 
+${message}`);
+
+const rl = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
 });
 
-// Routing
-app.use(express.static(__dirname + '/public'));
+rl.on('line', (line) => {
+  actions = line.split(' ');
 
-// Chatroom
-var messages = [];
-
-io.on('connection', (client) => {
-  var addedUser = false;
-  var user = {name: 'Анонимус', room: 'Общая' };
-
-  client.on('login', user => {
-    if (addedUser) return;
-    client.join(user.room);
-    client.emit('login', user);
-    client.emit('lastMessages', messages);
-    client.emit('newUser', user);
-    client.broadcast.to(user.room).emit('newUser', user);
-    addedUser = true;
-  });
-
-  client.on('message', message => {
-    client.broadcast.to(message.room).emit('message', message);
-    messages.push(message);
-  });
-
+  switch (actions[0]) {
+    case 'addName':
+      if (actions[1]) {
+        dbRequest.addName(actions);
+        break;
+      }
+    case 'showNames':
+      dbRequest.showNames(actions);
+      break;
+    case 'changeNames':
+      if (actions[1] && actions[2]) {
+        dbRequest.changeNames(actions);
+        break;
+      }
+      break;
+    case 'showChangedNames':
+      dbRequest.showChangedNames(actions);
+      break;
+    case 'resetNames':
+      dbRequest.resetNames(actions);
+      break;
+    case 'exit':
+      rl.close();  
+      break;
+    default:
+      console.log(message)
+  }
 });
