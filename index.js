@@ -1,46 +1,49 @@
-'use strict';
+"use strict";
 
-const hidenseek = require('./hidenseek');
-const p = require('./pokemon');
-const path = require('path');
+const c = require('./chat');
+const f = require('./functions');
 
-//const destination = './field/';
+let webinarChat =  new c.ChatApp('webinar');
+let facebookChat = new c.ChatApp('=========facebook');
+let vkChat =       new c.ChatApp('---------vk');
 
-switch (process.argv[2]) {
-  case 'hide':
-    let destination = process.argv[3];
-    try {
-      require(process.argv[4]);
-      let data = require(process.argv[4]);
-      let list = new p.PokemonList();
-      for (let pokemon of data) {
-        list.add(pokemon.name, pokemon.lvl);
-      }
-      let resultHide = hidenseek.hide(destination, list);
-      //setTimeout(()=>{console.log(resultHide);}, 500);
-    } catch (e) {
-      if (e.code === 'MODULE_NOT_FOUND') {
-        console.log('Не найден json. Формат: ./file.json');
-      } else if (path.extname(process.argv[4]) !== '.json') {
-        console.log('Файл не .json. Формат: ./file.json');
-      } else {
-        console.log(e);
-      }
-      break;
-    }
-    break;
-  case 'seek':
-      let resultSeek = hidenseek.seek(process.argv[3]);
-      //setTimeout(()=>{console.dir(resultSeek);}, 500);
-     // setTimeout(()=>{resultSeek.show();}, 1000);
-    break;
-  default:
-    console.log(`command:
-      for hide: 'hide path json'
-      for seek: 'seek path'
 
-      example:
-      node index hide ./field/ ./pokemons.json
-      node index seek ./field/
-      `);
-}
+webinarChat.on('message', f.chatOnMessage);
+facebookChat.on('message', f.chatOnMessage);
+vkChat.on('message', f.chatOnMessage);
+
+
+// Закрыть вконтакте
+setTimeout( ()=> {
+  console.log('Закрываю вконтакте...');
+  vkChat.removeListener('message', f.chatOnMessage);
+  vkChat.close('Чат вконтакте закрылся :(');
+}, 10000 );
+
+// Закрыть фейсбук
+setTimeout( ()=> {
+  console.log('Закрываю фейсбук, все внимание — вебинару!');
+  facebookChat.removeListener('message', f.chatOnMessage);
+  facebookChat.close();
+}, 15000 );
+
+
+// Закрыть webinar
+setTimeout( ()=> {
+  console.log('Закрываю вебинар!');
+  webinarChat.removeListener('message', f.chatOnMessage);
+  webinarChat.close();
+}, 30000 );
+
+
+// 1.1
+webinarChat.on('message', f.prepareForAnswer);
+
+// 1.2
+vkChat.setMaxListeners(2);
+vkChat.on('message', f.prepareForAnswer);
+
+// 2
+webinarChat.on('close', f.afterClose);
+facebookChat.on('close', f.afterClose);
+vkChat.on('close', f.afterClose);
