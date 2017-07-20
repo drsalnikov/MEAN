@@ -1,59 +1,49 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en" ng-app="myApp" class="no-js">
-<!--<![endif]-->
+<html ng-app="PokemonApp">
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>My AngularJS App</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <link rel="stylesheet" href="app.css">
-    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
+    <head>
+        <meta charset="utf-8">
+        <title>Фреймворк AngularJS / Нетология</title>
+        <script src="../node_modules/angular/angular.js"></script>
+        <script src="../node_modules/angular-route/angular-route.js"></script>
+        <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<body>
-    <div class="container">
+        <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+        <script src="../node_modules/angular-socket-io/socket.js"></script>
+    </head>
 
-        <main-menu></main-menu>
+    <body>
 
-        <shopping-cart-component></shopping-cart-component>
+        <div class="container">
 
-        <ui-view></ui-view>
+            <div class="panel panel-default">
+                <div class="panel-body">
 
-    </div>
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-default" href="#!/">Главная</a>
+                        <a class="btn btn-default" href="#!/pokemons">Покемоны</a>
+                        <a class="btn btn-default" href="#!/create">Добавить нового</a>
+                        <a class="btn btn-default" href="#!/realtime/Pikachu">PokeChat - Pikachu</a>
+                        <a class="btn btn-default" href="#!/realtime/Maxim">PokeChat - Maxim</a>
+                    </div>
 
+                </div>
+            </div>
 
+            <ng-view></ng-view>
 
-    <!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-messages/angular-messages.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="app.js"></script>
-    <script src="view1/view1.js"></script>
-    <script src="view2/view2.js"></script>
-    <script src="MainMenu/MainMenuCtrl.js"></script>
-    <script src="MyAccount/MyAccountCtrl.js"></script>
-    <script src="PokemonDetail/PokemonDetailCtrl.js"></script>
-    <script src="PokemonList/PokemonListCtrl.js"></script>
-    <script src="CreatePokemon/CreatePokemonCtrl.js"></script>
-    <script src="PokemonsService/PokemonsService.js"></script>
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
+        </div>
 
-    <script src="MyAccountSaver/MyAccountSaver.js"></script>
-    <script src="ShoppingCartStore/ShoppingCartStore.js"></script>
-    <script src="ShoppingCartComponent/ShoppingCartComponent.js"></script>
-</body>
+        <script src="src/PokemonApp.js"></script>
+        <script src="src/CreatePokemon/CreatePokemonCtrl.js"></script>
+        <script src="src/PokemonList/PokemonListCtrl.js"></script>
+        <script src="src/BerryList/BerryListCtrl.js"></script>
+        <script src="src/PokemonDetail/PokemonDetailCtrl.js"></script>
+        <script src="src/PokemonsService/PokemonsService.js"></script>
+        <script src="src/BerriesService/BerriesService.js"></script>
+
+        <script src="src/PokemonRealtime/PokemonRealtimeCtrl.js"></script>
+
+    </body>
 
 </html>
