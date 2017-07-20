@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title Стартовая страница
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+  body.container
+    h1 Телефонная карточка
+    form.form-horizontal(method='post' action='/person')
+      .form-group
+        label.col-sm-2.control-label(for='inputID') ID
+        .col-sm-10
+          input#inputID.form-control(name='id', placeholder='Создается автоматически', value = person._id)
+      .form-group
+        label.col-sm-2.control-label(for='inputName') ФИО
+        .col-sm-10
+          input#inputName.form-control(name='name', type='Name', placeholder='Name', value = person.name)
+      .form-group
+        label.col-sm-2.control-label(for='inputPhoneNumber') Номер
+        .col-sm-10
+          input#inputPhoneNumber.form-control(name='phonenumber', type='phoneNumber', placeholder='phone number', value = person.phonenumber)
+      .form-group
+        label.col-sm-2.control-label(for='appendix') Дополнительная информация
+        .col-sm-10
+          textarea#appendix.form-control(name='appendix', type='appendix', placeholder='Дополнительная информация') #{person.appendix}
+      .form-group
+        .col-sm-offset-2.col-sm-10.btn-group
+            button.btn.btn-default(type='submit') Сохранить изменения
+            a.btn.btn-default(href='/person/delete?id=' + person._id) Удалить
+            a.btn.btn-default(href='/phonebook') Назад
+    script(src='http://code.jquery.com/jquery-latest.js')
+    script(src='js/client.js')
+    script(src='js/bootstrap.min.js')

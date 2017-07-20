@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Телефонная книга
+    // Bootstrap
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+  body.container
+    h1 Телефонная книга
+    form.navbar-form.navbar-left(role='search', action='/phonebook', method='get')
+      .form-group
+        input.form-control(type='text', name='fio', placeholder='Поиск', value=search)
+      button.btn.btn-default(type='submit') Найти
+    a.btn.btn-default.navbar-btn(href='person/add') Добавить запись
+    table.table.table-hover
+      thead
+        tr
+          th Номер
+          th ФИО
+          th Телефонный номер
+      tbody
+          each list, i in phonelists
+            tr
+              td 
+                a(href="/person?id=" + list._id) #{i}
+              td
+                a(href="/person?id=" + list._id) #{list.name}
+              td
+                a(href="/person?id=" + list._id) #{list.phonenumber}
+    script(src='http://code.jquery.com/jquery-latest.js')
+    script(src='js/client.js')    
+    script(src='js/bootstrap.min.js')

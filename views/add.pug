@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title Стартовая страница
+    // Bootstrap
+    link(href='../css/bootstrap.min.css', rel='stylesheet')
+  body.container
+    h1 Телефонная карточка
+    form.form-horizontal(method='post' action='/person/add')
+      .form-group
+        label.col-sm-2.control-label(for='inputName') ФИО
+        .col-sm-10
+          input#inputName.form-control(name='name', placeholder='ФИО')
+      .form-group
+        label.col-sm-2.control-label(for='inputPhoneNumber') Номер
+        .col-sm-10
+          input#inputPhoneNumber.form-control(name='phonenumber', type='phoneNumber', placeholder='Телефонный номер')
+      .form-group
+        label.col-sm-2.control-label(for='appendix') Дополнительная информация
+        .col-sm-10
+          textarea#appendix.form-control(name='appendix', type='appendix', placeholder='Дополнительная информация')
+      .form-group
+        .col-sm-offset-2.col-sm-10.btn-group
+          button.btn.btn-default(type='submit') Добавить
+          a.btn.btn-default(href='/phonebook') Назад
+    script(src='http://code.jquery.com/jquery-latest.js')
+    script(src='../js/bootstrap.min.js')

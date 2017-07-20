@@ -1,10 +1,13 @@
 {
-  "name": "homework_3_1",
-  "version": "0.1.1",
-  "description": "Основы MongoDB",
+  "name": "homework_3_2",
+  "version": "0.1.0",
+  "description": "Все, что нужно знать про запросы в MongoDB",
   "main": "index.js",
   "dependencies": {
-    "mongodb": "^4.13.4"
+    "body-parser": "~1.17.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.2.26",
+    "pug": "^2.0.0-rc.1"
   },
   "scripts": {
     "start": "node index.js",
@@ -12,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/drsalnikov/nd-5-hw-3.1.git"
+    "url": "git+https://github.com/drsalnikov/nd-5-hw-3.2.git"
   },
   "author": "salnikovev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/drsalnikov/nd-5-hw-3.1/issues"
+    "url": "https://github.com/drsalnikov/nd-5-hw-3.2/issues"
   },
-  "homepage": "https://github.com/drsalnikov/nd-5-hw-3.1#readme"
+  "homepage": "https://github.com/drsalnikov/nd-5-hw-3.2#readme"
 }
