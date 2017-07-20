@@ -1,13 +1,6 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
-
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'view1/view1.html',
-            controller: 'View1Ctrl'
-        });
-    }])
+angular.module('myApp.view1', [])
 
     .controller('View1Ctrl', function ($scope) {
         $scope.pokemons = [{
@@ -122,7 +115,4 @@ angular.module('myApp.view1', ['ngRoute'])
 
         $scope.myOrderProperty = 'id';
 
-        $scope.showMyName = function (pokemon) {
-          alert(pokemon.name);
-        };
     });
