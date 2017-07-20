@@ -1,28 +1,34 @@
-<div ng-if="!pokemonLoaded">
+<div ng-if="!$ctrl.pokemonLoaded">
     <span class="glyphicon glyphicon-refresh"></span>
     Loading...
 </div>
 
-<div class="alert alert-danger" role="alert" ng-if="notfoundError">Покемон не найден</div>
+<div class="alert alert-danger" role="alert" ng-if="$ctrl.notfoundError">Покемон не найден</div>
 
-<div class="media" ng-if="pokemonLoaded">
-    <div class="media-body">
+<uib-tabset active="$ctrl.activeTab" >
 
-        <h1 class="media-heading">{{pokemon.name | uppercase }}</h1>
+    <uib-tab heading="Инфо" disable="$ctrl.disableControlTab">
+
+        <h1 class="media-heading">{{$ctrl.pokemon.name | uppercase }}</h1>
         <p>Вес:
-            {{pokemon.weight}}, рост:
-            {{pokemon.height}}</p>
+            {{$ctrl.pokemon.weight}}, рост:
+            {{$ctrl.pokemon.height}}</p>
 
-        <button class="btn btn-danger" ng-click="deletePokemon(pokemon.objectId)">
+    </uib-tab>
+
+    <uib-tab heading="Операции" >
+
+        <button class="btn btn-danger" ng-click="$ctrl.deletePokemon($ctrl.pokemon.objectId)">
             <span class="glyphicon glyphicon-trash"></span>
             Удалить
         </button>
-        <a class="btn btn-primary" href="#!/edit/{{pokemon.objectId}}">
+        <a class="btn btn-primary" href="#!/edit/{{$ctrl.pokemon.objectId}}">
             Редактировать
         </a>
 
-    </div>
-</div>
+    </uib-tab>
 
-<div class="alert alert-success" role="alert" ng-if="deletionSuccess">Пока, покемон!</div>
-<div class="alert alert-danger" role="alert" ng-if="deletionError">Покемоны не сдаются!</div>
+</uib-tabset>
+
+<div class="alert alert-success" role="alert" ng-if="$ctrl.deletionSuccess">Пока, покемон!</div>
+<div class="alert alert-danger" role="alert" ng-if="$ctrl.deletionError">Покемоны не сдаются!</div>

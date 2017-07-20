@@ -1,14 +1,14 @@
 'use strict';
 
-pokemonApp.controller('EditPokemonCtrl', function($scope, PokemonsService, $routeParams) {
+pokemonApp.controller('EditPokemonCtrl', function($scope, Restangular, $routeParams) {
 
-    $scope.pokemon = PokemonsService.get({
-        pokemonId: $routeParams['pokemonId']
+    Restangular.one('pokemon', $routeParams['pokemonId']).get().then(function(response) {
+        $scope.pokemon = response
     });
 
     $scope.updatePokemon = function() {
 
-        $scope.pokemon.$update({}, function(successResult) {
+        $scope.pokemon.put().then(function(successResult) {
             // Окей!
             $scope.updateSuccess = true;
         }, function(errorResult) {

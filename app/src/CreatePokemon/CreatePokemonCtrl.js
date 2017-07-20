@@ -1,6 +1,6 @@
 'use strict';
 
-pokemonApp.controller('CreatePokemonCtrl', function($scope, PokemonsService) {
+pokemonApp.controller('CreatePokemonCtrl', function($scope, PokemonsService, $mdToast) {
 
     $scope.newPokemon = {};
 
@@ -11,11 +11,15 @@ pokemonApp.controller('CreatePokemonCtrl', function($scope, PokemonsService) {
             // Окей!
             $scope.newPokemon = {};
 
-            $scope.newPokemonId = successResult.objectId;
-            $scope.creationSuccess = true;
+            $mdToast.show(
+                $mdToast.simple()
+                .textContent('Привет, покемон ' + successResult.objectId)
+                .position('bottom right')
+                .hideDelay(3000)
+            );
+
         }, function(errorResult) {
             // Не окей..
-            $scope.creationSuccess = false;
         });
 
     }

@@ -1,28 +1,50 @@
-<style>
-    .ng-dirty.ng-invalid {
-        border-color: #FA787E;
-    }
+<md-content class="md-padding" style="max-width: 400px;">
 
-    .ng-dirty.ng-valid {
-        border-color: #78FA89;
-    }
+    <md-card>
+        <md-card-header>
+            <md-card-avatar>
+                <img class="md-user-avatar" src="./assets/img/card-avatar.png" alt="Новый покемон"/>
+            </md-card-avatar>
+            <md-card-header-text>
+                <span class="md-title">Новый покемон</span>
+                <span class="md-subhead">Это хорошо</span>
+            </md-card-header-text>
+        </md-card-header>
+        <img ng-src="./assets/img/card-bg.jpg" class="md-card-image" alt="Новый покемон">
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline">Вот вам форма</span>
+                <span class="md-subhead">Давайте ее заполним</span>
+            </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
 
-</style>
+            <form name="pokemonForm" novalidate>
 
-<div class="alert alert-success" role="alert" ng-if="creationSuccess">Привет, покемон {{newPokemonId}}!</div>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Имя</label>
+                    <input ng-model="newPokemon.name" required>
+                </md-input-container>
 
-<form name="pokemonForm" novalidate>
-    <div class="form-group">
-        <label>Имя</label>
-        <input class="form-control" ng-model="newPokemon.name" type="text" placeholder="Имя" required>
-    </div>
-    <div class="form-group">
-        <label>Вес</label>
-        <input class="form-control" ng-model="newPokemon.weight" type="text" placeholder="Вес">
-    </div>
-    <div class="form-group">
-        <label>Рост</label>
-        <input class="form-control" ng-model="newPokemon.height" type="text" placeholder="Рост">
-    </div>
-    <button type="submit" class="btn btn-default" ng-click="createPokemon(newPokemon)" ng-disabled="pokemonForm.$invalid">Добавить</button>
-</form>
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Вес</label>
+                    <input ng-model="newPokemon.weight">
+                </md-input-container>
+
+                <md-input-container class="md-block" flex-gt-xs>
+                    <label>Рост</label>
+                    <input ng-model="newPokemon.height">
+                </md-input-container>
+
+                <md-switch ng-model="newPokemon.active" aria-label="Активен">
+                    Активен
+                </md-switch>
+
+                <md-button class="md-raised md-primary" ng-click="createPokemon(newPokemon)" ng-disabled="pokemonForm.$invalid">Добавить</md-button>
+
+            </form>
+
+        </md-card-content>
+    </md-card>
+
+</md-content>

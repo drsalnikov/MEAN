@@ -1,31 +1,37 @@
-<div ng-if="!pokemonLoaded">
-    <span class="glyphicon glyphicon-refresh"></span>
-    Loading...
+
+<div layout="column" ng-cloak>
+  <md-content class="md-padding">
+    <form ng-submit="$event.preventDefault()">
+      <md-autocomplete
+          ng-disabled="$ctrl.isDisabled"
+          md-no-cache="$ctrl.noCache"
+          md-selected-item="$ctrl.selectedItem"
+          md-search-text-change="$ctrl.searchTextChange($ctrl.searchText)"
+          md-search-text="$ctrl.searchText"
+          md-selected-item-change="$ctrl.selectedItemChange(item)"
+          md-items="item in $ctrl.querySearch($ctrl.searchText)"
+          md-item-text="item.display"
+          md-min-length="0"
+          placeholder="Поиск покемона по имени">
+        <md-item-template>
+          <span md-highlight-text="$ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>
+        </md-item-template>
+        <md-not-found>
+          Покемон "{{$ctrl.searchText}}" не найден!
+        </md-not-found>
+      </md-autocomplete>
+      <br/>
+  
+    </form>
+  </md-content>
+  <md-content>
+    <md-list flex>
+      <md-subheader class="md-no-sticky">Всего покемонов: {{$ctrl.pokemons.length}} </md-subheader>
+      <pokemon-list-item pokemon="singlePokemon" ng-repeat="singlePokemon in $ctrl.pokemons | filter: $ctrl.searchText"></pokemon-list-item>
+      <md-divider ></md-divider>
+      <md-subheader class="md-no-sticky"></md-subheader>
+    </md-list>
+  </md-content>
+
 </div>
 
-<div class="row" ng-if="pokemonLoaded">
-    <div class="col-md-8">
-        <div class="list-group">
-            <a href="#!/pokemons/{{singlePokemon.objectId }}" class="list-group-item" ng-repeat="singlePokemon in pokemons">
-
-                <h4>
-                    {{singlePokemon.name | uppercase }}
-                </h4>
-
-            </a>
-        </div>
-    </div>
-
-    <div class="col-md-4">
-        <div class="list-group">
-            <div class="list-group-item" ng-repeat="singleBerry in berries">
-
-                <h4>
-                    {{singleBerry.name | uppercase }}
-                </h4>
-
-            </div>
-        </div>
-    </div>
-
-</div>
