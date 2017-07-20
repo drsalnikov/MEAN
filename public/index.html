@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Чат</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <div class="login-page" id="login-page">
+      <form class="form" id="loginForm">
+        <p class="title">Введите имя</p>
+        <input class="usernameInput" id="usernameInput" type="text" maxlength="14" />
+        <p class="title">Имя комнаты. По умолчанию Общая</p>
+        <input class="roomnameInput" id="roomnameInput" type="text" maxlength="14" />
+        <input class="submit" type="submit" >
+      </form>
+    </div>
+    <div class="chat-page" id="chat-page">
+      <div class="menu">
+        <a class="back" href="">
+          <i class="fa fa-chevron-left"></i>
+        </a>
+        <div class="name" id="userName">Аноним</div>
+        <div class="room" id="roomName">Общая</div>
+      </div>
+      <ol id="messageList" class="chat">
+      </ol>
+      <form id="messageForm">
+        <input class="textarea" name="message" type="text" placeholder="Напиши текст сообщения! Для отправки нажми Enter...">
+      </form>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/client.js"></script>
+  </body>
+</html>

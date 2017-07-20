@@ -1,27 +1,25 @@
 {
-  "name": "homework_2_3",
-  "version": "1.0.0",
-  "description": "done!",
+  "name": "homework_2_4",
+  "version": "0.1.0",
+  "description": "Взаимодействие в реальном времени с Socket.io",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.15.2",
-    "body-parser": "~1.17.1"
-  },
-  "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-defaults": "^9.0.0"
+    "express": "^4.13.4",
+    "body-parser": "~1.17.1",
+    "socket.io": "~1.7.2"
   },
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/drsalnikov/nd-5-hw-2.3.git"
+    "url": "git+https://github.com/drsalnikov/nd-5-hw-2.2.git"
   },
   "author": "salnikovev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/drsalnikov/nd-5-hw-2.3/issues"
+    "url": "https://github.com/drsalnikov/nd-5-hw-2.2/issues"
   },
-  "homepage": "https://github.com/drsalnikov/nd-5-hw-2.3#readme"
+  "homepage": "https://github.com/drsalnikov/nd-5-hw-2.2#readme"
 }

@@ -1,60 +1,39 @@
-const express = require('express');
-const bodyParser = require('body-parser');
+'use strict';
 
-let app = express();
+// Setup basic express server
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
 
-app.use(bodyParser.json());
-
-// extra
-app.use((req, res, next) => {
-  // header = key
-  if(req.get('header') === 'key'){
-    next();
-  } else {
-    res.status(401).end();
-  }
+server.listen(port, function () {
+  console.log('Server listening at port %d', port);
 });
 
-// 1
-app.get("/", (req, res) => {
-  res.status(200).send(`Hello, Express.js`);
-});
+// Routing
+app.use(express.static(__dirname + '/public'));
 
-// 2
-app.get("/hello", (req, res) => {
-  res.status(200).send(`Hello stranger!`);
-});
+// Chatroom
+var messages = [];
 
-// 3
-app.get("/hello/:name*", (req, res) => {
-  let name = req.params.name;
-  if (name) {
-    res.status(200).send(`Hello, ${name}!`);
-  }
-});
+io.on('connection', (client) => {
+  var addedUser = false;
+  var user = {name: 'Анонимус', room: 'Общая' };
 
-// 4
-app.all("/sub/*", (req, res) => {
-  res.status(200).send(`You requested URI: ${req.protocol}://${req.get('host')}${req.originalUrl}`);
-});
+  client.on('login', user => {
+    if (addedUser) return;
+    client.join(user.room);
+    client.emit('login', user);
+    client.emit('lastMessages', messages);
+    client.emit('newUser', user);
+    client.broadcast.to(user.room).emit('newUser', user);
+    addedUser = true;
+  });
 
-// 5
-app.post("/post", (req, res) => {
-  if (JSON.stringify(req.body) !== '{}') {
-    res.status(200).json(req.body);
-  } else {
-   res.status(404).send('NOT FOUND'); 
-  }
-});
+  client.on('message', message => {
+    client.broadcast.to(message.room).emit('message', message);
+    messages.push(message);
+  });
 
-app.all('*', (req, res) => {
-  res.send(`Wrong request!`);
-});
-
-app.use(function(err, req, res, next) {
-  res.status(500).send('Something broke!');
-});
-
-app.listen(3000, () =>{
-  console.log('Server start');
 });
