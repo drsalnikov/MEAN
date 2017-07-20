@@ -4,44 +4,35 @@ pokemonApp.controller('PokemonDetailCtrl', function($scope, $routeParams, Pokemo
 
     $scope.pokemonLoaded = false;
 
-    PokemonsService.getPokemon($routeParams['pokemonId']).then(function(response) {
-        $scope.pokemon = response.data;
+    $scope.pokemon = PokemonsService.get({
+        pokemonId: $routeParams['pokemonId']
+    }, function(successResult) {
+        // Окей!
+        //console.log(successResult);
+        $scope.notfoundError = false;
         $scope.pokemonLoaded = true;
+    }, function(errorResult) {
+        // Не окей..
+        $scope.notfoundError = true;
+        $scope.pokemonLoaded = true;
+    });
+
+    $scope.pokemon.$promise.then(function(result) {
+        //$scope.pokemonLoaded = true;
     });
 
     $scope.deletePokemon = function(pokemonId) {
 
-        $scope.deletionError = false;
-        $scope.deletionSuccess = false;
-
-        PokemonsService.deletePokemon(pokemonId).then(function successCallback(response) {
-
+        $scope.pokemon.$delete({
+            pokemonId: pokemonId
+        }, function(successResult) {
             // Окей!
             $scope.deletionSuccess = true;
-
-        }, function errorCallback(response) {
-
+        }, function(errorResult) {
             // Не окей..
             $scope.deletionError = true;
         });
 
     }
 
-    $scope.updatePokemon = function(pokemonID, pokemon) {
-
-        $scope.updationError = false;
-        $scope.updationSuccess = false;
-
-        PokemonsService.updatePokemon(pokemonID, pokemon).then(function successCallback(response) {
-
-            // Окей!
-            $scope.updationSuccess = true;
-
-        }, function errorCallback(response) {
-
-            // Не окей..
-            $scope.updationError = true;
-        });
-
-    }
 });

@@ -6,15 +6,16 @@ pokemonApp.controller('CreatePokemonCtrl', function($scope, PokemonsService) {
 
     $scope.createPokemon = function(myPokemon) {
 
-        $scope.creationSuccess = false;
-
-        PokemonsService.createPokemon(myPokemon).then(function(response) {
-
+        var newPokemonInstance = new PokemonsService(myPokemon);
+        newPokemonInstance.$save({}, function(successResult) {
+            // Окей!
             $scope.newPokemon = {};
 
-            $scope.newPokemonId = response.data.objectId;
+            $scope.newPokemonId = successResult.objectId;
             $scope.creationSuccess = true;
-
+        }, function(errorResult) {
+            // Не окей..
+            $scope.creationSuccess = false;
         });
 
     }

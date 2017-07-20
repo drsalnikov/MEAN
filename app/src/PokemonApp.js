@@ -1,7 +1,7 @@
-var pokemonApp = angular.module('PokemonApp', ['ngRoute', 'btford.socket-io']);
+var pokemonApp = angular.module('PokemonApp', ['ngRoute', 'ngResource']);
 
-angular
-    .module('PokemonApp')
+angular.
+module('PokemonApp')
 
 .config(['$routeProvider',
     function config($routeProvider) {
@@ -15,13 +15,13 @@ angular
             templateUrl: 'src/PokemonDetail/PokemonDetail.html',
             controller: 'PokemonDetailCtrl'
         }).
+        when('/edit/:pokemonId', {
+            templateUrl: 'src/EditPokemon/EditPokemon.html',
+            controller: 'EditPokemonCtrl'
+        }).
         when('/create', {
             templateUrl: 'src/CreatePokemon/CreatePokemon.html',
             controller: 'CreatePokemonCtrl'
-        }).
-        when('/realtime/:userName', {
-            templateUrl: 'src/PokemonRealtime/PokemonRealtime.html',
-            controller: 'PokemonRealtimeCtrl'
         }).
         otherwise({
             redirectTo: '/'
@@ -29,12 +29,19 @@ angular
     }
 ])
 
-.factory('mySocket', function(socketFactory) {
-  var myIoSocket = io.connect('https://netology-socket-io.herokuapp.com/');
+.config(['$httpProvider', function($httpProvider) {
+    // Мой
+    $httpProvider.defaults.headers.common = {
+        "application-id": "9736714B-86ED-EBFE-FF63-D1106BB6E000",
+        "secret-key": "A32A42C4-C045-8D4E-FF02-EA912286AC00"
+    };
 
-    mySocket = socketFactory({
-      ioSocket: myIoSocket
-    });
+    /* 
+    // Максим
+    $httpProvider.defaults.headers.common = {
+        "application-id": "4B730C92-F81E-236B-FFF0-6651FE882800",
+        "secret-key": "CB6DE86C-6069-86C4-FF1C-9049D5AC9400"
+    };
+    */
 
-    return mySocket;
-});
+}]);

@@ -1,7 +1,7 @@
 {
   "name": "nd-5-hw-4.3",
   "version": "0.0.1",
-  "description": "XHR-запросы в Angular - основа работы с back-end приложения",
+  "description": "Взаимодействие с классически построенным RESTful API - это просто!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,8 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "angular": "^1.5.8",
+    "angular-resource": "^1.5.8",
     "angular-route": "^1.5.8",
-    "angular-socket-io": "^0.7.0",
     "bootstrap": "^3.3.7"
   },
   "devDependencies": {

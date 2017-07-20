@@ -5,9 +5,8 @@
 
 <div class="row" ng-if="pokemonLoaded">
     <div class="col-md-8">
-
         <div class="list-group">
-            <a href="#!/pokemons/{{singlePokemon.name }}" class="list-group-item" ng-repeat="singlePokemon in pokemons">
+            <a href="#!/pokemons/{{singlePokemon.objectId }}" class="list-group-item" ng-repeat="singlePokemon in pokemons">
 
                 <h4>
                     {{singlePokemon.name | uppercase }}
@@ -15,10 +14,9 @@
 
             </a>
         </div>
-
     </div>
-    <div class="col-md-4">
 
+    <div class="col-md-4">
         <div class="list-group">
             <div class="list-group-item" ng-repeat="singleBerry in berries">
 
@@ -26,8 +24,8 @@
                     {{singleBerry.name | uppercase }}
                 </h4>
 
-            </a>
+            </div>
         </div>
-
     </div>
+
 </div>

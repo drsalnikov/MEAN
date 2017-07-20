@@ -1,16 +1,16 @@
 angular
     .module('PokemonApp')
-    .factory('BerriesService', function($http) {
+    .factory('BerriesService', function($resource, $http) {
 
-            return {
-
-                getBerries: function() {
-                    return $http.get('http://pokeapi.co/api/v2/berry/?limit=5');
-                    //return $http.get('https://api.backendless.com/v1/data/berry');
+        return $resource('https://api.backendless.com/v1/data/berry/:berryId', {
+          berryId: '@berryId'
+        }, {
+            query: {
+                method: 'GET',
+                isArray: true,
+                transformResponse: function(responseData) {
+                    return angular.fromJson(responseData).data;
                 }
-
             }
-
-        }
-
-    );
+        })
+    });
