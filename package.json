@@ -1,27 +1,27 @@
 {
-  "name": "nd-5-hw-4.5",
+  "name": "nd-5-hw-5.1",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drsalnikov/nd-5-hw-5.1.git"
+  },
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "angular": "^1.5.8",
-    "angular-animate": "^1.5.8",
-    "angular-aria": "^1.5.8",
-    "angular-material": "^1.1.1",
-    "angular-resource": "^1.5.8",
-    "angular-route": "^1.5.8",
-    "angular-ui-bootstrap": "^2.1.4",
-    "bootstrap": "^3.3.7",
-    "lodash": "^4.16.3",
-    "restangular": "1.5.2"
+  "bugs": {
+    "url": "https://github.com/drsalnikov/nd-5-hw-5.1/issues"
   },
+  "homepage": "https://github.com/drsalnikov/nd-5-hw-5.1#readme",
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-server-livereload": "^1.8.4"
+    "body-parser": "^1.17.2",
+    "chai": "^3.5.0",
+    "express": "^4.15.3",
+    "mocha": "^3.4.1",
+    "supertest": "^3.0.0"
   }
 }
