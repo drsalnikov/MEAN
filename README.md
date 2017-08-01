@@ -1,5 +1,5 @@
 # nd-5-hw-4.5
 
-Переделать PokemonDetail в компонент <pokemon-detail>
+Переделать PokemonDetail в компонент 
 
-Использовать Angular Material -> List для <pokemon-list>
+Использовать Angular Material -> List
